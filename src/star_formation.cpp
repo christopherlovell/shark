@@ -380,11 +380,13 @@ double StarFormation::fmol(double Sigma_gas, double Sigma_stars, double zgas, do
 
 	double fmol = rmol/(1+rmol);
 
-	// Avoid calculation errors.
-	if(fmol > 1){
+	// Avoid calculation errors. rmol/(1+rmol) rounds to exactly 1 once
+	// rmol >= 2^53, so the upper clamp must be inclusive or fully molecular
+	// gas would be assigned zero molecular fraction.
+	if(fmol >= 1){
 		return 1;
 	}
-	else if(fmol > 0 && fmol < 1){
+	else if(fmol > 0){
 		return fmol;
 	}
 	else{
