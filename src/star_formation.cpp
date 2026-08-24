@@ -709,7 +709,7 @@ double StarFormation::manual_integral(func_t f, void * params, double rmin, doub
 		rf = std::pow(10.0,rf) - 1.0;
 		double rx =(rf + ri) * 0.5 ;
 
-		integral += f(rx, &params) * (rf - ri);
+		integral += f(rx, params) * (rf - ri);
 	}
 
 	// Avoid negative numbers.
